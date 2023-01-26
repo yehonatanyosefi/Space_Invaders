@@ -18,10 +18,6 @@ function init() {
     createAliens(gBoard)
     createHero(gBoard)
     renderBoard(gBoard)
-    if (isBgMusic === false) {
-        playSound('bg_music', 0.25, true)
-        isBgMusic = true
-    }
 }
 
 function setGlobals() {
