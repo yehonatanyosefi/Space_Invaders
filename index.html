@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Space Invaders by Yehonatan Yosefi</title>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+
+	<body onload="init()" onkeydown="onKeyDown(event)">
+		<h5>HD Space Invaders</h5>
+		<div class="score">Score: <span>0</span></div>
+		<!-- <button onclick="toggleGame(this)"></button> -->
+		<div class="container">
+		</div>
+		<div class="modal">
+			<h2 class="user-msg">You <span>won!</span></h2>
+			<button class="restart-btn" onclick="init()">Restart</button>
+		</div>
+		<script src="js/util.js"></script>
+		<script src="js/hero.js"></script>
+		<script src="js/alien.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+	<footer><h5>Made by Yehonatan Yosefi</h3></footer>
+</html>
