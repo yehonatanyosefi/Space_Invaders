@@ -13,23 +13,16 @@ function createHero(board) {
 
 // Handle game keys
 function onKeyDown(ev) {
-    if (isBgMusic === false) {
-        playSound('bg_music', 0.25, true)
-        isBgMusic = true
-    }   
+    if (!gGame.isOn) return
     switch (ev.key) {
         case 'ArrowLeft':
             if (gHero.pos.j > 0) {
-                updateCell(gHero.pos)
-                gHero.pos.j--
-                updateCell(gHero.pos, HERO)
+                moveHero('left')
             }
             break
         case 'ArrowRight':
             if (gHero.pos.j < BOARD_SIZE - 1) {
-                updateCell(gHero.pos)
-                gHero.pos.j++
-                updateCell(gHero.pos, HERO)
+                moveHero('right')
             }
             break
         case ' ':
@@ -43,6 +36,10 @@ function onKeyDown(ev) {
 
 // Move the hero right (1) or left (-1)
 function moveHero(dir) { //?
+    updateCell(gHero.pos)
+    if (dir === 'right') gHero.pos.j++
+    else if (dir === 'left') gHero.pos.j--
+    updateCell(gHero.pos, HERO)
 
 }
 
@@ -67,16 +64,20 @@ function handleShoot(pos) {
     var currCell = gBoard[pos.i][pos.j]
     if (currCell.gameObject === ALIEN) {
         updateCell(pos)
-        gHero.isShoot = false
-        clearInterval(gHero.laserInterval)
-        gGame.score += 10
-        updateScore()
-        playSound('kill')
-        gGame.aliensCount--
-        if (gGame.aliensCount === 0) gameFinish(true)
+        handleHit()
     } else {
         blinkLaser(pos)
     }
+}
+
+function handleHit() {
+    gHero.isShoot = false
+    clearInterval(gHero.laserInterval)
+    gGame.score += 10
+    updateScore()
+    playSound('kill')
+    gGame.aliensCount--
+    if (gGame.aliensCount === 0) gameFinish(true)
 }
 
 // renders a LASER at specific cell for short time and removes it

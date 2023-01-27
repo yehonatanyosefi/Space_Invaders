@@ -23,6 +23,15 @@ function updateScore() {
     elScore.innerText = gGame.score
 }
 
+function updateModal(display, msg = 'Press Start to Begin', btn = 'Start') {
+    var elModal = document.querySelector('.modal')
+    elModal.style.display = display
+    var elMsg = document.querySelector('.user-msg')
+    elMsg.innerText = msg
+    var elBtn = document.querySelector('.restart-btn')
+    elBtn.innerText = btn
+}
+
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';

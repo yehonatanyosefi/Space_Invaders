@@ -19,6 +19,10 @@ function init() {
     createHero(gBoard)
     renderBoard(gBoard)
 }
+function gameStart() {
+    gGame.isOn = true
+    moveAliens()
+}
 
 function setGlobals() {
     gGame = {
@@ -26,12 +30,13 @@ function setGlobals() {
         aliensCount: 0,
         score: 0,
     }
+    gAliensTopRowIdx = 1
+    gAlienMoveCount = 0
+    gLastAlienRow = 3
 }
 
 function updateGlobals() {
     updateScore()
-    var elModal = document.querySelector('.modal')
-    elModal.style.display = 'none'
 }
 
 // Create and returns the board with aliens on top, ground at bottom
@@ -86,16 +91,24 @@ function updateCell(pos, gameObject = null) {
 }
 
 function gameFinish(isWin) {
-    // gGame.isOn = false
-    
-    var elModal = document.querySelector('.modal')
-    elModal.style.display = 'block'
-    var elMsg = document.querySelector('.user-msg span')
+    gGame.isOn = false
     if (!isWin) {
-        elMsg.innerText = 'lost. Try again!'
-        playSound('game_lose')
+        updateModal('block', 'You lost. Try again!', 'restart')
+        playSound('game_over')
+        clearInterval(gIntervalAliens)
     } else {
-        elMsg.innerText = 'won!'
+        updateModal('block', 'You won!', 'restart')
         playSound('game_win')
     }
+}
+
+function onStart() {
+    updateModal('none')
+    playSound('click_button')
+    if (isBgMusic === false) {
+        playSound('bg_music', 0.25, true)
+        isBgMusic = true
+    }
+    init()
+    gameStart()
 }

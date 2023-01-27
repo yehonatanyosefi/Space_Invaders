@@ -1,8 +1,11 @@
 body {
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
-    background-image: url('img/stars.GIF');
+    background-image: url(../img/stars.gif);
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
 }
 
 table {
@@ -11,15 +14,22 @@ table {
     margin: auto;
     background-color: black;
     color: white;
-    border: 1px solid black;
+    border: 1px solid white;
+    overflow: hidden;
+    border-radius: 10px;
+    table-layout: fixed;
+    background-image: url(../img/stars.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 td, th {
   margin: 0;
-  border: 1px solid grey;
   white-space: nowrap;
   border-top-width: 0px;
-  border: 1px solid black;
+  border: 0px solid black;
+  table-layout: fixed;
 }
 
 .cell {
@@ -28,11 +38,12 @@ td, th {
     width: 25px;
     text-align: center;
     transition: 0.5s;
+    table-layout: fixed;
 }
 
 img {
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
 }
 
 .score {
@@ -40,15 +51,21 @@ img {
 }
 
 .modal {
-    display: none;
+    display: block;
+    height: auto;
     width: 300px;
     padding: 20px;
     position: absolute;
-    top: 300px;
+    top: 260px;
     left: calc(50% - 175px);
   }
+
   .modal, button {
     background-color: black;
-    color:white;
     border: 5px solid white;
+    color: white;
+    background-image: url(../img/stars.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
