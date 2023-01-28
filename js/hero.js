@@ -53,10 +53,11 @@ function moveHero(dir) {
 
 // Sets an interval for shutting (blinking) the laser up towards aliens
 function handleShoot(pos) {
-    gHero.isLaser = true
-    playSound('shoot')
     var pos = { i: gHero.pos.i - 1, j: gHero.pos.j }
+    playSound('shoot')
+    if (gBoard[pos.i][pos.j].type === ROCK) removeRock(pos)
     gHero.laserPos = pos
+    gHero.isLaser = true
     blinkLaser(pos)
     checkHit(pos)
     setShootInterval(pos)
@@ -78,8 +79,8 @@ function checkHit(pos) {
         killAlien(pos)
         removeLaser()
     } else if (currCell.type === CANDY) {
-        collectCandy(pos)
         removeLaser()
+        collectCandy(pos)
     } else if (currCell.type === ROCK) {
         removeRock(pos)
         removeLaser()
@@ -97,9 +98,9 @@ function setShootInterval(pos) {
         gHero.laserPos = pos
         if (pos.i < 0) {
             removeLaser()
-            return
+        } else {
+            checkHit(pos)
         }
-        checkHit(pos)
     }, gHero.laserSpeed)
 }
 
