@@ -32,7 +32,7 @@ function init() {
     updateGlobals()
     gBoard = createBoard()
     createAliens(gBoard)
-    // createBunkers(gBoard)
+    createBunkers(gBoard)
     createHero(gBoard)
     renderBoard(gBoard)
 }
