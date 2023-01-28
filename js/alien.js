@@ -1,4 +1,4 @@
-const ALIEN_SPEED = 997;
+const ALIEN_SPEED = 777;
 // The following two variables represent the part of the matrix (some rows)
 // that we should shift (left, right, and bottom)
 // We need to update those when:
