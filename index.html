@@ -6,14 +6,15 @@
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
 
-	<body onload="init()" onkeydown="onKeyDown(event)"> 
-		<div class="score">Score: <span>0</span></div>
+	<body onload="init()" onkeydown="onKeyDown(event)">
+		<div class="score">High Score: <span id="high-score">0</span>   Score: <span id="current-score">0</span></div>
 		<div class="modal">
-			<h2 class="user-msg">Press Start to Begin</h2>
+			<h2 class="user-msg">'Arrow keys' - move<br>'Space' - shoot<br>'x' - Fast Laser</h2>
 			<button class="restart-btn" onclick="onStart()">Start</button>
 		</div>
 		<div class="container">
 		</div>
+		<div class="game-elemets"><span id="lives"></span><span id="fast-lasers"></span></div>
 		<script src="js/util.js"></script>
 		<script src="js/main.js"></script>
 		<script src="js/alien.js"></script>

@@ -1,12 +1,5 @@
 'use strict'
 
-// Returns a new cell object. e.g.: {type: SKY, gameObject: ALIEN}
-function createCell(gameObject = null) {
-    return {
-        type: SKY,
-        gameObject: gameObject
-    }
-}
 function getElCell(pos) {
     return document.querySelector(`[data-i='${pos.i}'][data-j='${pos.j}']`);
 }
@@ -18,9 +11,38 @@ function playSound(fileName, volume = 1, loop = false) {
     audio.play()
 }
 
+function updateLives() {
+    var elLives = document.querySelector('#lives')
+    var img = HERO
+    for (var i = 1; i < gHero.lives; i++) {
+        img += HERO
+    }
+    elLives.innerHTML = img
+    if (gHero.lives === 0) elLives.classList.add('hidden')
+    else elLives.classList.remove('hidden')
+}
+
+function updateFastLasers() {
+    var elFastLasers = document.querySelector('#fast-lasers')
+    var img = FAST_LASER
+    for (var i = 1; i < gHero.superAttackCount; i++) {
+        img += FAST_LASER
+    }
+    elFastLasers.innerHTML = img
+    if (gHero.superAttackCount === 0) elFastLasers.classList.add('hidden')
+    else elFastLasers.classList.remove('hidden')
+}
+
 function updateScore() {
-    var elScore = document.querySelector('.score span')
+    var elScore = document.querySelector('#current-score')
     elScore.innerText = gGame.score
+}
+
+function updateHighScore() {
+    var score = localStorage.score
+    var elScore = document.querySelector('#high-score')
+    if (score >= 10000) elScore.innerText = '∞'
+    else elScore.innerText = score
 }
 
 function updateModal(display, msg = 'Press Start to Begin', btn = 'Start') {
@@ -32,6 +54,12 @@ function updateModal(display, msg = 'Press Start to Begin', btn = 'Start') {
     elBtn.innerText = btn
 }
 
+function getRandomInt(min, max) {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min) + min) // The maximum is inclusive and the minimum is inclusive
+}
+
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -39,12 +67,6 @@ function getRandomColor() {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-}
-
-function getRandomInt(min, max) {
-    min = Math.ceil(min)
-    max = Math.floor(max)
-    return Math.floor(Math.random() * (max - min + 1) + min) // The maximum is inclusive and the minimum is inclusive
 }
 
 function getNegs(cellI, cellJ, mat) {
